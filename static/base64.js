@@ -1,119 +1,103 @@
-//base64加密 解密
-
-/* //1.加密  
-var result = Base.encode('125中文');  //--> "MTI15Lit5paH"
-  
-//2.解密  
-var result2 = Base.decode(result); //--> '125中文'
-*/
-
-~(function(root, factory) {
+/**
+ * https://www.cnblogs.com/ryans/p/6512631.html
+ * Copyright (c) 2017-2022 by RyanxChen & xiaohong2022
+ */
+!(function (_6vIFH, rXR6A) {
     if (typeof define === "function" && define.amd) {
-      define([], factory);
+        define([], rXR6A);
     } else if (typeof module === "object" && module.exports) {
-      module.exports = factory();
+        module.exports = rXR6A();
     } else {
-      root.Base = factory();
-    }
-  }(this, function() {
-     'use strict';
-     
-      function Base64() {
-          // private property
-          this._keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-      }
-      //public method for encoding
-      Base64.prototype.encode = function (input) {
-          var output = "", chr1, chr2, chr3, enc1, enc2, enc3, enc4, i = 0;
-          input = this._utf8_encode(input);
-          while (i < input.length) {
-              chr1 = input.charCodeAt(i++);
-              chr2 = input.charCodeAt(i++);
-              chr3 = input.charCodeAt(i++);
-              enc1 = chr1 >> 2;
-              enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
-              enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
-              enc4 = chr3 & 63;
-              if (isNaN(chr2)) {
-                  enc3 = enc4 = 64;
-              } else if (isNaN(chr3)) {
-                  enc4 = 64;
-              }
-              output = output +
-              this._keyStr.charAt(enc1) + this._keyStr.charAt(enc2) +
-              this._keyStr.charAt(enc3) + this._keyStr.charAt(enc4);
-          }
-          return output;
-      }
-  
-      // public method for decoding
-      Base64.prototype.decode = function (input) {
-          var output = "", chr1, chr2, chr3, enc1, enc2, enc3, enc4, i = 0;
-          input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
-          while (i < input.length) {
-              enc1 = this._keyStr.indexOf(input.charAt(i++));
-              enc2 = this._keyStr.indexOf(input.charAt(i++));
-              enc3 = this._keyStr.indexOf(input.charAt(i++));
-              enc4 = this._keyStr.indexOf(input.charAt(i++));
-              chr1 = (enc1 << 2) | (enc2 >> 4);
-              chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
-              chr3 = ((enc3 & 3) << 6) | enc4;
-              output = output + String.fromCharCode(chr1);
-              if (enc3 != 64) {
-                  output = output + String.fromCharCode(chr2);
-              }
-              if (enc4 != 64) {
-                  output = output + String.fromCharCode(chr3);
-              }
-          }
-          output = this._utf8_decode(output);
-          return output;
-      }
-  
-      // private method for UTF-8 encoding
-      Base64.prototype._utf8_encode = function (string) {
-          string = string.replace(/\r\n/g,"\n");
-          var utftext = "";
-          for (var n = 0; n < string.length; n++) {
-              var c = string.charCodeAt(n);
-              if (c < 128) {
-                  utftext += String.fromCharCode(c);
-              } else if((c > 127) && (c < 2048)) {
-                  utftext += String.fromCharCode((c >> 6) | 192);
-                  utftext += String.fromCharCode((c & 63) | 128);
-              } else {
-                  utftext += String.fromCharCode((c >> 12) | 224);
-                  utftext += String.fromCharCode(((c >> 6) & 63) | 128);
-                  utftext += String.fromCharCode((c & 63) | 128);
-              }
-      
-          }
-          return utftext;
-      }
-  
-      // private method for UTF-8 decoding
-      Base64.prototype._utf8_decode = function (utftext) {
-          var string = "", i = 0, c = 0, c1 = 0, c2 = 0, c3 = 0;
-          while ( i < utftext.length ) {
-              c = utftext.charCodeAt(i);
-              if (c < 128) {
-                  string += String.fromCharCode(c);
-                  i++;
-              } else if((c > 191) && (c < 224)) {
-                  c2 = utftext.charCodeAt(i+1);
-                  string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
-                  i += 2;
-              } else {
-                  c2 = utftext.charCodeAt(i+1);
-                  c3 = utftext.charCodeAt(i+2);
-                  string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
-                  i += 3;
-              }
-          }
-          return string;
-      }
-      
-      var Base = new Base64();
-      
-      return Base;
-  }));
+        (_6vIFH || (this || self || window)).Base64 = rXR6A();
+    };
+}(this, function () {
+    'use strict';
+    const __9f2YpS_ = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+    const __gE5egd_ = (_9Uz84) => {
+        _9Uz84 = _9Uz84.replace(/\r\n/g, "\n");
+        var casU4 = "";
+        for (var n = 0; n < _9Uz84.length; n++) {
+            var r3mA = _9Uz84.charCodeAt(n);
+            if (r3mA < 128) {
+                casU4 += String.fromCharCode(r3mA);
+            } else if ((r3mA > 127) && (r3mA < 2048)) {
+                casU4 += String.fromCharCode((r3mA >> 6) | 192);
+                casU4 += String.fromCharCode((r3mA & 63) | 128);
+            } else {
+                casU4 += String.fromCharCode((r3mA >> 12) | 224);
+                casU4 += String.fromCharCode(((r3mA >> 6) & 63) | 128);
+                casU4 += String.fromCharCode((r3mA & 63) | 128);
+            };
+        };
+        return casU4;
+    };
+    const __0TJ5gd_ = (casU4) => {
+        var _9Uz84 = "", _2VpM_ = 0, r3mA = 0, Iy6S0a = 0, _4Hcio = 0, _2S9uD = 0;
+        while (_2VpM_ < casU4.length) {
+            r3mA = casU4.charCodeAt(_2VpM_);
+            if (r3mA < 128) {
+                _9Uz84 += String.fromCharCode(r3mA);
+                _2VpM_++;
+            } else if ((r3mA > 191) && (r3mA < 224)) {
+                _4Hcio = casU4.charCodeAt(_2VpM_ + 1);
+                _9Uz84 += String.fromCharCode(((r3mA & 31) << 6) | (_4Hcio & 63));
+                _2VpM_ += 2;
+            } else {
+                _4Hcio = casU4.charCodeAt(_2VpM_ + 1);
+                _2S9uD = casU4.charCodeAt(_2VpM_ + 2);
+                _9Uz84 += String.fromCharCode(((r3mA & 15) << 12) | ((_4Hcio & 63) << 6) | (_2S9uD & 63));
+                _2VpM_ += 3;
+            };
+        };
+        return _9Uz84;
+    };
+    class M9OqF {
+        constructor() { };
+        encode(aV6le) {
+            var WFR4l = "", Ql7c, zc9E, fDD6, pOb4, J8wo, N4Nh, u0jL, _2VpM_ = 0;
+            aV6le = __gE5egd_(aV6le);
+            while (_2VpM_ < aV6le.length) {
+                Ql7c = aV6le.charCodeAt(_2VpM_++);
+                zc9E = aV6le.charCodeAt(_2VpM_++);
+                fDD6 = aV6le.charCodeAt(_2VpM_++);
+                pOb4 = Ql7c >> 2;
+                J8wo = ((Ql7c & 3) << 4) | (zc9E >> 4);
+                N4Nh = ((zc9E & 15) << 2) | (fDD6 >> 6);
+                u0jL = fDD6 & 63;
+                if (isNaN(zc9E)) {
+                    N4Nh = u0jL = 64;
+                } else if (isNaN(fDD6)) {
+                    u0jL = 64;
+                };
+                WFR4l = WFR4l +
+                    __9f2YpS_.charAt(pOb4) + __9f2YpS_.charAt(J8wo) +
+                    __9f2YpS_.charAt(N4Nh) + __9f2YpS_.charAt(u0jL);
+            };
+            return WFR4l;
+        };
+        decode(aV6le) {
+            var WFR4l = "", Ql7c, zc9E, fDD6, pOb4, J8wo, N4Nh, u0jL, _2VpM_ = 0;
+            aV6le = aV6le.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+            while (_2VpM_ < aV6le.length) {
+                pOb4 = __9f2YpS_.indexOf(aV6le.charAt(_2VpM_++));
+                J8wo = __9f2YpS_.indexOf(aV6le.charAt(_2VpM_++));
+                N4Nh = __9f2YpS_.indexOf(aV6le.charAt(_2VpM_++));
+                u0jL = __9f2YpS_.indexOf(aV6le.charAt(_2VpM_++));
+                Ql7c = (pOb4 << 2) | (J8wo >> 4);
+                zc9E = ((J8wo & 15) << 4) | (N4Nh >> 2);
+                fDD6 = ((N4Nh & 3) << 6) | u0jL;
+                WFR4l = WFR4l + String.fromCharCode(Ql7c);
+                if (N4Nh != 64) {
+                    WFR4l = WFR4l + String.fromCharCode(zc9E);
+                };
+                if (u0jL != 64) {
+                    WFR4l = WFR4l + String.fromCharCode(fDD6);
+                };
+            };
+            WFR4l = __0TJ5gd_(WFR4l);
+            return WFR4l;
+        };
+    };
+    var ct7P = new M9OqF();
+    return ct7P;
+}));
