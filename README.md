@@ -5,7 +5,7 @@
 - [开源](https://github.com/link-gen)。🌏
 - 无跟踪，无广告，永久免费。📡 🚫
 - 无需数据库。全部数据均储存在 [GitHub Repository](https://docs.github.com/repositories) 中。:octocat:
-- 支持自定义链接。🔧
+- 支持自定义链接、自定义查看方式等高级选项。🛠
 - 可加密访问，再也不用担心别人串门访问了。😎
 
 > **注意：**\

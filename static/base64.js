@@ -16,8 +16,8 @@
     const __gE5egd_ = (_9Uz84) => {
         _9Uz84 = _9Uz84.replace(/\r\n/g, "\n");
         var casU4 = "";
-        for (var n = 0; n < _9Uz84.length; n++) {
-            var r3mA = _9Uz84.charCodeAt(n);
+        for (var swu_ = 0; swu_ < _9Uz84.length; swu_++) {
+            var r3mA = _9Uz84.charCodeAt(swu_);
             if (r3mA < 128) {
                 casU4 += String.fromCharCode(r3mA);
             } else if ((r3mA > 127) && (r3mA < 2048)) {
